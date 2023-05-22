@@ -24,8 +24,27 @@ class Ball:
             
     def collide_with(self, paddle):
         if self.rect.colliderect(paddle.rect):
-            self.x_speed = -self.x_speed
-            self.y_speed = -self.y_speed
+            # Colisión en el lado derecho del paddle cuando la bola se mueve hacia la derecha
+            if self.x_speed > 0 and self.rect.right >= paddle.rect.left and self.rect.left < paddle.rect.left:
+                self.rect.right = paddle.rect.left - 1  # Ajusta la posición de la bola justo a la izquierda del paddle
+                self.x_speed = -self.x_speed
+
+            # Colisión en el lado izquierdo del paddle cuando la bola se mueve hacia la izquierda
+            elif self.x_speed < 0 and self.rect.left <= paddle.rect.right and self.rect.right > paddle.rect.right:
+                self.rect.left = paddle.rect.right + 1  # Ajusta la posición de la bola justo a la derecha del paddle
+                self.x_speed = -self.x_speed  
+
+            # Colisión en la parte inferior del paddle cuando la bola se mueve hacia abajo
+            if self.y_speed > 0 and self.rect.bottom >= paddle.rect.top and self.rect.top < paddle.rect.top:
+                self.rect.bottom = paddle.rect.top - 1  # Ajusta la posición de la bola justo encima del paddle
+                self.y_speed = -self.y_speed 
+                self.x_speed = -self.x_speed
+
+            # Colisión en la parte superior del paddle cuando la bola se mueve hacia arriba
+            elif self.y_speed < 0 and self.rect.top <= paddle.rect.bottom and self.rect.bottom > paddle.rect.bottom:
+                self.rect.top = paddle.rect.bottom + 1  # Ajusta la posición de la bola justo debajo del paddle
+                self.y_speed = -self.y_speed  
+                self.x_speed = -self.x_speed
             
     def draw(self, screen):
         pygame.draw.rect(screen, WHITE, self.rect)
