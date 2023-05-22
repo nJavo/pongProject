@@ -12,9 +12,9 @@ class Paddle:
     def move(self, speed):
         keys = pygame.key.get_pressed()
         if keys[self.up_key]:
-            self.rect.move_ip(0, -speed)
-        elif keys[self.down_key]:
             self.rect.move_ip(0, speed)
+        elif keys[self.down_key]:
+            self.rect.move_ip(0, -speed)
         
         if self.rect.top < 0:
             self.rect.top = 0

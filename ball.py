@@ -25,7 +25,6 @@ class Ball:
     def collide_with(self, paddle):
         if self.rect.colliderect(paddle.rect):
             self.x_speed = -self.x_speed
-            self.y_speed = -self.y_speed
             
     def draw(self, screen):
         pygame.draw.rect(screen, WHITE, self.rect)
